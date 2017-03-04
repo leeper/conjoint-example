@@ -4,15 +4,15 @@
 
 // seed random number generator from embedded data fields
 // conjoint profile 1
-Math.seedrandom('${e://Field/seed1a}' * '${e://Field/seed1b}');
+Math.seedrandom('${e://Field/seed1}');
 // conjoint profile 2
-//Math.seedrandom('${e://Field/seed2a}' * '${e://Field/seed2b}');
+//Math.seedrandom('${e://Field/seed2}');
 // conjoint profile 3
-//Math.seedrandom('${e://Field/seed3a}' * '${e://Field/seed3b}');
+//Math.seedrandom('${e://Field/seed3}');
 // conjoint profile 4
-//Math.seedrandom('${e://Field/seed4a}' * '${e://Field/seed4b}');
+//Math.seedrandom('${e://Field/seed4}');
 // conjoint profile 5
-//Math.seedrandom('${e://Field/seed5a}' * '${e://Field/seed5b}');
+//Math.seedrandom('${e://Field/seed5}');
 
 // Create Variables for Traits associated with each dimension.
 var vsex = ["Male", "Female"];
