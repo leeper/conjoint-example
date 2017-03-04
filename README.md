@@ -252,9 +252,15 @@ One concern with using javscript to randomly sample is that javascript is [a cli
 
 In many languages that would be easy to achieve with a [seeded pseudo-random number generator](https://en.wikipedia.org/wiki/Random_seed), but javascript's PRNG is not seeded. Luckily, David Bau has written [seedrandom.js](https://github.com/davidbau/seedrandom/) to achieve this. Serious props to him!
 
-To use it, we need to create some PRNG seeds - one for every profile - that are held constant for the user. To do that, we rely on Qualtrics random number [web service](https://www.qualtrics.com/support/survey-platform/survey-module/survey-flow/advanced-elements/web-service/) to create embedded data fields that store seeds for each respondent. Follow the directions on that link to get this setup.
+To use it, we need to create some PRNG seeds - one for every profile - that are held constant for the user. To do that, we rely on Qualtrics random number [web service](https://www.qualtrics.com/support/survey-platform/survey-module/survey-flow/advanced-elements/web-service/) to create embedded data fields that store seeds for each respondent. Follow the directions on that link to get this setup in the Qualtrics Survey Flow (button at the top of the survey page). Create a "Web Service" entry with the following configuration:
 
-Unfortunately, though, the web service only draws random numbers between 0 and 5000. If we rely on this, we will only see 5001 of the possible profiles. So, for our design we actually generate two seeds for each respondent and multiply them together to create the seed that we actually pass to the PRNG. So, we include the randomseed.js code and then for each profile we grab our two embedded data seeds using the Qualtrics `${e://Field/EMBEDDEDDATAFIELD}` notation:
+ - URL: `http://reporting.qualtrics.com/projects/randomNumGen.php`
+ - Setup `min` argument: `0`
+ - Setup `max` argument: `99999999999` (or whatever seems reasonable for your project
+ - Setup "Set Embedded Data" field name: `seed1`
+ - Setup "Set Embedded Data" service value: `random`
+
+You will need to setup one of these "Web Service" entries for each conjoint profile, saving the seed as a unique embedded data field. So, if you have five conjoint profiles to display, you will need to setup five Web Service entries and five corresponding embedded data seed fields (`seed1`, `seed2`, `seed3`, `seed4`, `seed5`) that will be populated by the web service calls and retrieved via the javascript. The randomseed.js code will then be added to each conjoint profile question's javascript field, grabbing the right embedded data seed using the Qualtrics `${e://Field/EMBEDDEDDATAFIELD}` notation to set the seed for that profile page:
 
 ```js
 // import seeded random number generator code
@@ -262,15 +268,15 @@ Unfortunately, though, the web service only draws random numbers between 0 and 5
 
 // seed random number generator from embedded data fields
 // conjoint profile 1
-Math.seedrandom('${e://Field/seed1a}' * '${e://Field/seed1b}');
+Math.seedrandom('${e://Field/seed1}');
 // conjoint profile 2
-//Math.seedrandom('${e://Field/seed2a}' * '${e://Field/seed2b}');
+//Math.seedrandom('${e://Field/seed2}');
 // conjoint profile 3
-//Math.seedrandom('${e://Field/seed3a}' * '${e://Field/seed3b}');
+//Math.seedrandom('${e://Field/seed3}');
 // conjoint profile 4
-//Math.seedrandom('${e://Field/seed4a}' * '${e://Field/seed4b}');
+//Math.seedrandom('${e://Field/seed4}');
 // conjoint profile 5
-//Math.seedrandom('${e://Field/seed5a}' * '${e://Field/seed5b}');
+//Math.seedrandom('${e://Field/seed5}');
 ```
 
 I show all of the seed setting code above, with only the first line uncommented. For subsequent profiles, uncomment only the relevant seed setting line. All of this code has to come before everything above (again, see [conjoint.js](conjoint.js) for a complete working example).
