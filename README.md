@@ -256,7 +256,7 @@ To use it, we need to create some PRNG seeds - one for every profile - that are 
 
  - URL: `http://reporting.qualtrics.com/projects/randomNumGen.php`
  - Setup `min` argument: `0`
- - Setup `max` argument: `99999999999` (or whatever seems reasonable for your project
+ - Setup `max` argument: `99999999999` (or whatever seems reasonable for your project)
  - Setup "Set Embedded Data" field name: `seed1`
  - Setup "Set Embedded Data" service value: `random`
 
@@ -337,7 +337,7 @@ The resulting feature values come out in the output data as a character variable
 60|Female|Asian American|Jewish|U.S. Senator|Republican|Served|Community college|Slightly support|Slightly support|Slightly oppose|Strongly support|Slightly oppose
 ```
 
-You can then use simple string manipulation to convert these two separate variables. In Stata it would be something like:
+You can then use simple string manipulation to convert these to separate variables. In Stata it would be something like:
 
 ```stata
 split trait1a, parse(|)
