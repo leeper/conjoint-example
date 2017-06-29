@@ -1,3 +1,5 @@
+**Update 2017-06-29: THIS CODE NO LONGER WORKS DUE TO QUALTRICS RELYING ON ITS NEW 'JFE' SYSTEM. THERE MAY BE WAYS TO MAKE THIS WORK, BUT I CANNOT GUARANTEE ANYTHING AND AM UNABLE TO CONTINUE TO SUPPORT THIS PROJECT. SORRY.**
+
 # Example Conjoint Experimental Design in Qualtrics
 
 This is an example of conducting a conjoint experiment in Qualtrics. It benefitted heavily from Kyle Dropp's guide, ["Implementing a Conjoint Analysis in Qualtrics"](http://www.weebly.com/uploads/1/2/0/9/12094568/conjoint.pdf).
