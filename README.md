@@ -1,5 +1,3 @@
-**Update 2017-06-29: THIS CODE NO LONGER WORKS DUE TO QUALTRICS RELYING ON ITS NEW 'JFE' SYSTEM. THERE MAY BE WAYS TO MAKE THIS WORK, BUT I CANNOT GUARANTEE ANYTHING AND AM UNABLE TO CONTINUE TO SUPPORT THIS PROJECT. SORRY.**
-
 # Example Conjoint Experimental Design in Qualtrics
 
 This is an example of conducting a conjoint experiment in Qualtrics. It benefitted heavily from Kyle Dropp's guide, ["Implementing a Conjoint Analysis in Qualtrics"](http://www.weebly.com/uploads/1/2/0/9/12094568/conjoint.pdf).
@@ -330,6 +328,15 @@ That's it on javascript!
 
 Once question is setup with the relevant html and javascript, it can simply be copied into a new question for each profile you want to show. The HTML doesn't need to be changed, but the javascript should be commented/uncommented to draw the relevant seeds and store the feature values in the relevant embedded data field.
 
+There is one very important final issue that **must** be addressed for this to work correctly. In the "Look & Feel" settings of the survey, you have to set "Page Transitions" to "none"
+
+![look-and-feel](look-and-feel.png)
+
+This prevents "preloading" of the javascript (and thus failure of the the whole thing).
+
+(Note: There is some argumentation online about whether setting an additional query string argument in the survey URL (specifically, `Q_JFE=0`) will solve this. In my experience, it does not; and it also has the consequence of making surveys behave weirdly on mobile devices. The page transitions is a pretty small price to pay for getting this to otherwise work.)
+
+With that done, the survey should be good to go!
 
 ## 4. Analyze
 
@@ -357,4 +364,4 @@ With that setup, you can simply analyze the data using regular regression analys
 
 ---
 
-Thanks to Kyle Dropp for guidance on how to do this!
+Thanks to Kyle Dropp for guidance on how to do this! And thanks to Isaac from Qualtrics support for help getting the page transition addressed in June 2017.
