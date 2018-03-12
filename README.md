@@ -355,7 +355,7 @@ split trait1a, parse(|)
 In R, there are multiple strategies but something like:
 
 ```R
-do.call(rbind.data.frame, strsplit(d[["trait1a"]], "|"))
+do.call(rbind.data.frame, strsplit(d[["trait1a"]], "\\|"))
 ```
 
 would give you a data frame that could be `cbind()`-ed on to the original data frame.
